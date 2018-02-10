@@ -1,6 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -28,18 +28,18 @@
             <td>${employee.name}</td>
             <td>${employee.joiningDate}</td>
             <td>${employee.salary}</td>
-            <td><a href="<c:url value='list/edit-${employee.ssn}-employee' />">${employee.ssn}</a></td>
-            <td><a href="<c:url value='list/delete-${employee.ssn}-employee' />">delete</a></td>
+            <td><a href="<c:url value='/edit-${employee.ssn}-employee' />">${employee.ssn}</a></td>
+            <td><a href="<c:url value='/delete-${employee.ssn}-employee' />">delete</a></td>
         </tr>
     </c:forEach>
 </table>
 <br/>
-<a href="<c:url value='/list/new' />">Add New Employee</a>
-<form action="<c:url value="/logout"/>" method="post">
-    <input type="hidden"
-           name="${_csrf.parameterName}"
-           value="${_csrf.token}"/>
+<a href="<c:url value='/new' />">Add New Employee</a>
+
+<form action="<c:url value="/logout"/>" method="post" id="logoutForm">
     <input type="submit" value="Logout">
+    <input type="hidden" name="${_csrf.parameterName}"
+           value="${_csrf.token}" />
 </form>
 </body>
 </html>

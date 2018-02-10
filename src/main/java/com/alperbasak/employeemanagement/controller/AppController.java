@@ -3,6 +3,7 @@ package com.alperbasak.employeemanagement.controller;
 
 import com.alperbasak.employeemanagement.model.Employee;
 import com.alperbasak.employeemanagement.service.EmployeeService;
+import com.alperbasak.employeemanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -18,29 +19,27 @@ import java.util.List;
 import java.util.Locale;
 
 @Controller
-@RequestMapping("/")
 public class AppController {
 
    @Autowired
-   EmployeeService service;
+   EmployeeService employeeService;
+
+   @Autowired
+    UserService userService;
 
    @Autowired
    MessageSource messageSource;
 
-    @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
-    public String login(ModelMap model){
-        return "login";
-    }
 
-    @RequestMapping(value = {"/list"},method = RequestMethod.GET)
+    @RequestMapping(value = {"/","/list"},method = RequestMethod.GET)
     public String listEmployees(ModelMap model){
 
-        List<Employee> employees=service.findAllEmployees();
+        List<Employee> employees= employeeService.findAllEmployees();
         model.addAttribute("employees",employees);
         return "allemployees";
     }
 
-    @RequestMapping(value = {"list/new"},method = RequestMethod.GET)
+    @RequestMapping(value = {"/new"},method = RequestMethod.GET)
     public String newEmployee(ModelMap model){
         Employee employee=new Employee();
         model.addAttribute("employee",employee);
@@ -48,49 +47,49 @@ public class AppController {
         return "registration";
     }
 
-    @RequestMapping(value = {"list/new"},method = RequestMethod.POST)
+    @RequestMapping(value = {"/new"},method = RequestMethod.POST)
     public String addEmployee(@Valid  Employee employee, BindingResult result,ModelMap model){
         if (result.hasErrors()){
             return "registration";
         }
-        if (!service.isEmployeeSsnUnique(employee.getId(),employee.getSsn())){
+        if (!employeeService.isEmployeeSsnUnique(employee.getId(),employee.getSsn())){
             FieldError fieldError=new FieldError("employee","ssn", messageSource.getMessage("non.unique.ssn",new String[]{employee.getSsn()}, Locale.getDefault()));
             result.addError(fieldError);
             return "registration";
         }
 
-        service.saveEmployee(employee);
+        employeeService.saveEmployee(employee);
         model.addAttribute("success","Employee "+employee.getName()+" registered successfully");
         return "success";
     }
 
-    @RequestMapping(value = {"list/edit-{ssn}-employee"},method = RequestMethod.GET)
+    @RequestMapping(value = {"/edit-{ssn}-employee"},method = RequestMethod.GET)
     public String editEmployee(@PathVariable String ssn, ModelMap model){
-        Employee employee=service.findBySsn(ssn);
+        Employee employee= employeeService.findBySsn(ssn);
         model.addAttribute("employee",employee);
         model.addAttribute("edit",true);
         return "registration";
     }
 
-    @RequestMapping(value = {"list/edit-{ssn}-employee"},method = RequestMethod.POST)
+    @RequestMapping(value = {"/edit-{ssn}-employee"},method = RequestMethod.POST)
     public String updateEmployee(@Valid Employee employee,BindingResult result,ModelMap model,@PathVariable String ssn){
         if (result.hasErrors()){
             return "registration";
         }
-        if (!service.isEmployeeSsnUnique(employee.getId(),employee.getSsn())){
+        if (!employeeService.isEmployeeSsnUnique(employee.getId(),employee.getSsn())){
             FieldError fieldError=new FieldError("employee","ssn", messageSource.getMessage("non.unique.ssn",new String[]{employee.getSsn()}, Locale.getDefault()));
             result.addError(fieldError);
             return "registration";
         }
 
-        service.updateEmployee(employee);
+        employeeService.updateEmployee(employee);
         model.addAttribute("success","Employee "+employee.getName()+" updated successfully");
         return "success";
     }
 
-    @RequestMapping(value = "list/delete-{ssn}-employee",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete-{ssn}-employee",method = RequestMethod.DELETE)
     public String deleteEmployee(@PathVariable String ssn){
-       service.deleteEmployeeBySsn(ssn);
+       employeeService.deleteEmployeeBySsn(ssn);
        return "redirect:/list";
     }
 

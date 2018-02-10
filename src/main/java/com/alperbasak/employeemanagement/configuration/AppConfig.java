@@ -54,11 +54,12 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("login");
+        registry.addViewController("/").setViewName("list");
         registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/access-denied").setViewName("access-denied");
         registry.addViewController("/list").setViewName("list");
-        registry.addViewController("/list/new").setViewName("new");
-        registry.addViewController("/list/success").setViewName("success");
-        registry.addViewController("/list/error").setViewName("error");
+        registry.addViewController("/new").setViewName("new");
+        registry.addViewController("/success").setViewName("success");
+        registry.addViewController("/error").setViewName("error");
     }
 }

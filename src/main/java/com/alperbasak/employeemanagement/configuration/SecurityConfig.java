@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -23,6 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
+
     @Value("${spring.queries.users-query}")
     private String usersQuery;
 
@@ -31,29 +31,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.
-                authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/login").permitAll()
-                .anyRequest().authenticated()
-                .and().csrf().disable().formLogin()
-                .loginPage("/login").failureUrl("/login?error").permitAll(true)
-                .defaultSuccessUrl("/list")
-                .usernameParameter("email")
+
+                http.authorizeRequests()
+                .antMatchers("/login*","/access-denied").permitAll()
+                .anyRequest().hasAnyRole("ADMIN")
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .usernameParameter("username")
                 .passwordParameter("password")
-                .and().logout()
-                .logoutSuccessUrl("/login?logout").permitAll(true).and().exceptionHandling()
-                .accessDeniedPage("/access-denied");
+                .and()
+                .logout()
+                .logoutSuccessUrl("/login?logout")
+                .logoutUrl("/logout").permitAll()
+                .and().exceptionHandling().accessDeniedPage("/access-denied");
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
         auth.
-                jdbcAuthentication()
+                jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery(usersQuery)
                 .authoritiesByUsernameQuery(rolesQuery)
-                .dataSource(dataSource)
                 .passwordEncoder(bCryptPasswordEncoder);
     }
 
