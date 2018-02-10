@@ -1,89 +1,55 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
-<html>
-<head>
-    <title>Login Page</title>
-    <style>
-        .error {
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid transparent;
-            border-radius: 4px;
-            color: #a94442;
-            background-color: #f2dede;
-            border-color: #ebccd1;
-        }
+pageEncoding="ISO-8859-1"%>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../static/images/favicon.ico">
 
-        .msg {
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid transparent;
-            border-radius: 4px;
-            color: #31708f;
-            background-color: #d9edf7;
-            border-color: #bce8f1;
-        }
+    <title>Employee Management Portal</title>
 
-        #login-box {
-            width: 300px;
-            padding: 20px;
-            margin: 100px auto;
-            background: #fff;
-            -webkit-border-radius: 2px;
-            -moz-border-radius: 2px;
-            border: 1px solid #000;
-        }
-    </style>
-</head>
-<body onload='document.loginForm.username.focus();'>
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
 
-<h1>Spring Security Custom Login Form (XML)</h1>
+    <!-- Custom styles for this template -->
+    <link href="../static/css/signin.css" rel="stylesheet">
 
-<div id="login-box">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
 
-    <h2>Login with Username and Password</h2>
+  <body>
 
-    <c:if test="${param.error != null}">
-        <p style='color:red'>
+    <div class="container">
+      <form class="form-signin" name="loginForm" action="<c:url value="/login"/>" method='POST'>
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <c:if test="${param.error != null}">
+          <p class="alert alert-danger">
             Invalid username or password.
-        </p>
-    </c:if>
-    <c:if test="${param.logout != null}">
-        <p style='color:blue'>
+          </p>
+        </c:if>
+        <c:if test="${param.logout != null}">
+          <p class="alert alert-success">
             You have been logged out.
-        </p>
-    </c:if>
-
-    <form name='loginForm'
-          action="<c:url value="/login"/>" method='POST'>
-
-        <table>
-            <tr>
-                <td>User:</td>
-                <td><label>
-                    <input type='text' name='username' value=''>
-                </label></td>
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td><label>
-                    <input type='password' name='password'/>
-                </label></td>
-            </tr>
-            <tr>
-                <td colspan='2'><input name="submit" type="submit" value="submit" /></td>
-            </tr>
-            <tr>
-                <td colspan='2'><input name="reset" type="reset" />
-                </td>
-            </tr>
-        </table>
-
+          </p>
+        </c:if>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-    </form>
-</div>
+      </form>
 
-</body>
+    </div> <!-- /container -->
+  </body>
 </html>

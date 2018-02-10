@@ -4,8 +4,10 @@
 <html>
 <head>
     <title>ERROR</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-message : ${exception}
+An error occured.
+Go back to <a href="<c:url value='/list' />">List of All Employees</a>
 </body>
 </html>

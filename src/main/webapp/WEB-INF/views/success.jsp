@@ -6,6 +6,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Registration Confirmation Page</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 message : ${success}

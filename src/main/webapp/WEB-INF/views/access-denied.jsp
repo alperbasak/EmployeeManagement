@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <title>Access Denied</title>
 </head>
 <body>
