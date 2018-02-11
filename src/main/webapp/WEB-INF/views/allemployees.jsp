@@ -33,18 +33,21 @@
         <div class="navbar-header">
             <div class="navbar-brand">Employee Management</div>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <form action="<c:url value="/logout"/>" method="post" class="navbar-form navbar-right">
+        <div id="navbar" class="navbar-collapse collapse navbar-form">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="<c:url value='/list' />">List of Employees</a></li>
+                <li><form action="<c:url value="/logout"/>" method="post" class="navbar-form">
                     <button type="submit" class="btn btn-default">Logout</button>
                     <input type="hidden" name="${_csrf.parameterName}"
                            value="${_csrf.token}" />
-                </form>
+                </form></li>
+            </ul>
         </div>
     </div>
 </nav>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
             <h2 class="sub-header">Employees</h2>
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -64,6 +67,7 @@
                             <td>${employee.joiningDate}</td>
                             <td>${employee.salary}</td>
                             <td><a href="<c:url value='/edit-${employee.ssn}-employee' />">${employee.ssn}</a></td>
+                            <!--TODO button eklenecek-->
                             <td><a href="<c:url value='/delete-${employee.ssn}-employee' />">Delete</a></td>
                         </tr>
                     </c:forEach>

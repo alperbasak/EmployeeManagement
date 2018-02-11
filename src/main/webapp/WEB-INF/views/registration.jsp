@@ -34,60 +34,64 @@
         <div class="navbar-header">
             <div class="navbar-brand">Employee Management</div>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <form action="<c:url value="/logout"/>" method="post" class="navbar-form navbar-right">
+        <div id="navbar" class="navbar-collapse collapse navbar-form">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="<c:url value='/list' />">List of Employees</a></li>
+            <li><form action="<c:url value="/logout"/>" method="post" class="navbar-form">
                 <button type="submit" class="btn btn-default">Logout</button>
                 <input type="hidden" name="${_csrf.parameterName}"
                        value="${_csrf.token}" />
-            </form>
+            </form></li>
+            </ul>
         </div>
     </div>
 </nav>
-<h2>Registration Form</h2>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-7 col-md-offset-2 main">
+            <h2 class="sub-header">Registration Form</h2>
+            <div class="table-responsive">
+                <form:form method="POST" modelAttribute="employee">
+                <form:input type="hidden" path="id" id="id"/>
+                <table class="table table-condensed" style="table-layout: fixed">
+                    <tr>
+                        <td><label for="name" style="width: 15%;text-align: right">Name: </label>
+                        <form:input path="name" id="name"/>
+                        <form:errors path="name" /></td>
+                    </tr>
 
-<div class="col-md-6">
-<form:form method="POST" modelAttribute="employee">
-    <form:input type="hidden" path="id" id="id"/>
-    <table class="table table-bordered">
-        <tr>
-            <td><label for="name">Name: </label> </td>
-            <td><form:input path="name" id="name"/></td>
-            <td><form:errors path="name" /></td>
-        </tr>
+                    <tr>
+                        <td><label for="joiningDate" style="width: 15%;text-align: right">Joining Date: </label>
+                        <form:input path="joiningDate" id="joiningDate"/>
+                        <form:errors path="joiningDate" /></td>
+                    </tr>
 
-        <tr>
-            <td><label for="joiningDate">Joining Date: </label> </td>
-            <td><form:input path="joiningDate" id="joiningDate"/></td>
-            <td><form:errors path="joiningDate" /></td>
-        </tr>
+                    <tr>
+                        <td><label for="salary" style="width: 15%;text-align: right">Salary: </label>
+                        <form:input path="salary" id="salary"/>
+                        <form:errors path="salary" /></td>
+                    </tr>
 
-        <tr>
-            <td><label for="salary">Salary: </label> </td>
-            <td><form:input path="salary" id="salary"/></td>
-            <td><form:errors path="salary" /></td>
-        </tr>
-
-        <tr>
-            <td><label for="ssn">SSN: </label> </td>
-            <td><form:input path="ssn" id="ssn"/></td>
-            <td><form:errors path="ssn"/></td>
-        </tr>
-    </table>
-    <br/>
-    <c:choose>
-        <c:when test="${edit}">
-            <input type="submit" value="Update"/>
-        </c:when>
-        <c:otherwise>
-            <input type="submit" value="Register"/>
-        </c:otherwise>
-    </c:choose>
-</form:form>
-</div>
-
-<br/>
-<a href="<c:url value='/list' />"><button type="button" class="btn btn-info">List of All Employees</button></a>
-
+                    <tr>
+                        <td><label for="ssn" style="width: 15%;text-align: right">SSN: </label>
+                        <form:input path="ssn" id="ssn"/>
+                        <form:errors path="ssn"/></td>
+                    </tr>
+                </table>
+                    <br/>
+                        <c:choose>
+                        <c:when test="${edit}">
+                            <button type="submit" class="btn btn-success" value="Update">Update</button>
+                        </c:when>
+                        <c:otherwise>
+                            <button type="submit" class="btn btn-success" value="Register">Register</button>
+                        </c:otherwise>
+                    </c:choose>
+                </form:form>
+            </div>
+        </div>
+        </div>
+    </div>
 <footer class="footer">
     <div class="container">
         <p class="text-muted">By Alper Basak</p>
