@@ -67,8 +67,9 @@
                             <td>${employee.joiningDate}</td>
                             <td>${employee.salary}</td>
                             <td><a href="<c:url value='/edit-${employee.ssn}-employee' />">${employee.ssn}</a></td>
-                            <!--TODO button eklenecek-->
-                            <td><a href="<c:url value='/delete-${employee.ssn}-employee' />">Delete</a></td>
+                            <td><a href="<c:url value='/delete-${employee.ssn}-employee' />">
+                                    <button type="button" class="btn btn-danger btn-sm">Delete</button></a>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>
