@@ -10,9 +10,11 @@ public interface EmployeeDao {
 
     void saveEmployee(Employee employee);
 
-    void deleteEmployeeBySsn(String ssn);
+    void deleteEmployeeById(int id);
 
     List<Employee> findAllEmployees();
 
-    Employee findEmployeeBySsn(String ssn);
+    Employee findEmployeeByPhone(String phone);
+
+    Employee findEmployeeByEmail(String email);
 }

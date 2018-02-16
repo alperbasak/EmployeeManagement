@@ -52,44 +52,56 @@ public class AppController {
         if (result.hasErrors()){
             return "registration";
         }
-        if (!employeeService.isEmployeeSsnUnique(employee.getId(),employee.getSsn())){
-            FieldError fieldError=new FieldError("employee","ssn", messageSource.getMessage("non.unique.ssn",new String[]{employee.getSsn()}, Locale.getDefault()));
+        if (!employeeService.isEmployeeEmailUnique(employee.getId(),employee.getEmail())){
+            FieldError fieldError=new FieldError("employee","email", messageSource.getMessage("non.unique.email",new String[]{employee.getEmail()}, Locale.getDefault()));
+            result.addError(fieldError);
+            return "registration";
+        }
+        if (!employeeService.isEmployeePhoneUnique(employee.getId(),employee.getPhoneNumber())){
+            FieldError fieldError=new FieldError("employee","phone", messageSource.getMessage("non.unique.phone",new String[]{employee.getPhoneNumber()}, Locale.getDefault()));
             result.addError(fieldError);
             return "registration";
         }
 
         employeeService.saveEmployee(employee);
-        model.addAttribute("success","Employee "+employee.getName()+" registered successfully");
+        model.addAttribute("success","Employee "+employee.getFirstName()
+                + " " + employee.getLastName() +" registered successfully");
         return "success";
     }
 
-    @RequestMapping(value = {"/edit-{ssn}-employee"},method = RequestMethod.GET)
-    public String editEmployee(@PathVariable String ssn, ModelMap model){
-        Employee employee= employeeService.findBySsn(ssn);
+    @RequestMapping(value = {"/edit-{id}-employee"},method = RequestMethod.GET)
+    public String editEmployee(@PathVariable int id, ModelMap model){
+        Employee employee= employeeService.findById(id);
         model.addAttribute("employee",employee);
         model.addAttribute("edit",true);
         return "registration";
     }
 
-    @RequestMapping(value = {"/edit-{ssn}-employee"},method = RequestMethod.POST)
-    public String updateEmployee(@Valid Employee employee,BindingResult result,ModelMap model,@PathVariable String ssn){
+    @RequestMapping(value = {"/edit-{id}-employee"},method = RequestMethod.POST)
+    public String updateEmployee(@Valid Employee employee,BindingResult result,ModelMap model,@PathVariable int id){
         if (result.hasErrors()){
             return "registration";
         }
-        if (!employeeService.isEmployeeSsnUnique(employee.getId(),employee.getSsn())){
-            FieldError fieldError=new FieldError("employee","ssn", messageSource.getMessage("non.unique.ssn",new String[]{employee.getSsn()}, Locale.getDefault()));
+        if (!employeeService.isEmployeeEmailUnique(employee.getId(),employee.getEmail())){
+            FieldError fieldError=new FieldError("employee","email", messageSource.getMessage("non.unique.email",new String[]{employee.getEmail()}, Locale.getDefault()));
+            result.addError(fieldError);
+            return "registration";
+        }
+        if (!employeeService.isEmployeePhoneUnique(employee.getId(),employee.getPhoneNumber())){
+            FieldError fieldError=new FieldError("employee","phone", messageSource.getMessage("non.unique.phone",new String[]{employee.getPhoneNumber()}, Locale.getDefault()));
             result.addError(fieldError);
             return "registration";
         }
 
         employeeService.updateEmployee(employee);
-        model.addAttribute("success","Employee "+employee.getName()+" updated successfully");
+        model.addAttribute("success","Employee "+employee.getFirstName()
+                + " " + employee.getLastName() +" updated successfully");
         return "success";
     }
 
-    @RequestMapping(value = "/delete-{ssn}-employee",method = RequestMethod.GET)
-    public String deleteEmployee(@PathVariable String ssn){
-       employeeService.deleteEmployeeBySsn(ssn);
+    @RequestMapping(value = "/delete-{id}-employee",method = RequestMethod.GET)
+    public String deleteEmployee(@PathVariable int id){
+       employeeService.deleteEmployeeById(id);
        return "redirect:/list";
     }
 

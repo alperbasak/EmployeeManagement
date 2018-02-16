@@ -47,27 +47,35 @@
 </nav>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
+        <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-2 main">
             <h2 class="sub-header">Employees</h2>
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>Name</th>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
                         <th>Joining Date</th>
                         <th>Salary</th>
-                        <th>SSN</th>
+                        <th>Commission Percent</th>
                     </tr>
                     </thead>
                     <tbody>
                     <jsp:useBean id="employees" scope="request" type="java.util.List"/>
                     <c:forEach items="${employees}" var="employee">
                         <tr>
-                            <td>${employee.name}</td>
+                            <td><a href="<c:url value='/edit-${employee.id}-employee' />">${employee.id}</a></td>
+                            <td>${employee.firstName}</td>
+                            <td>${employee.lastName}</td>
+                            <td>${employee.email}</td>
+                            <td>${employee.phoneNumber}</td>
                             <td>${employee.joiningDate}</td>
                             <td>${employee.salary}</td>
-                            <td><a href="<c:url value='/edit-${employee.ssn}-employee' />">${employee.ssn}</a></td>
-                            <td><a href="<c:url value='/delete-${employee.ssn}-employee' />">
+                            <td>${employee.commissionPrc}</td>
+                            <td><a href="<c:url value='/delete-${employee.id}-employee' />">
                                     <button type="button" class="btn btn-danger btn-sm">Delete</button></a>
                             </td>
                         </tr>

@@ -48,16 +48,35 @@
 </nav>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-9 col-sm-offset-3 col-md-7 col-md-offset-2 main">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h2 class="sub-header">Registration Form</h2>
             <div class="table-responsive">
                 <form:form method="POST" modelAttribute="employee">
                 <form:input type="hidden" path="id" id="id"/>
                 <table class="table table-condensed" style="table-layout: fixed">
+
                     <tr>
-                        <td><label for="name" style="width: 15%;text-align: right">Name: </label>
-                        <form:input path="name" id="name"/>
-                        <form:errors path="name" /></td>
+                        <td><label for="firstName" style="width: 15%;text-align: right">First Name: </label>
+                            <form:input path="firstName" id="firstName"/>
+                            <form:errors path="firstName" /></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="lastName" style="width: 15%;text-align: right">Last Name: </label>
+                            <form:input path="lastName" id="lastName"/>
+                            <form:errors path="lastName" /></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="email" style="width: 15%;text-align: right">Email: </label>
+                            <form:input path="email" id="email"/>
+                            <form:errors path="email" /></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="phoneNumber" style="width: 15%;text-align: right">Phone Number: </label>
+                            <form:input path="phoneNumber" id="phoneNumber"/>
+                            <form:errors path="phoneNumber" /></td>
                     </tr>
 
                     <tr>
@@ -73,9 +92,9 @@
                     </tr>
 
                     <tr>
-                        <td><label for="ssn" style="width: 15%;text-align: right">SSN: </label>
-                        <form:input path="ssn" id="ssn"/>
-                        <form:errors path="ssn"/></td>
+                        <td><label for="commissionPrc" style="width: 15%;text-align: right">Commission Price: </label>
+                        <form:input path="commissionPrc" id="ssn"/>
+                        <form:errors path="commissionPrc"/></td>
                     </tr>
                 </table>
                     <br/>

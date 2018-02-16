@@ -26,8 +26,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee findBySsn(String ssn) {
-        return dao.findEmployeeBySsn(ssn);
+    public Employee findByPhone(String phone) {
+        return dao.findEmployeeByPhone(phone);
+    }
+
+    @Override
+    public Employee findByEmail(String email) {
+        return dao.findEmployeeByEmail(email);
     }
 
     @Override
@@ -39,21 +44,32 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void updateEmployee(Employee employee) {
         Employee em=dao.findEmployeeById(employee.getId());
         if (em!=null){
-            em.setName(employee.getName());
+            em.setFirstName(employee.getFirstName());
+            em.setLastName(employee.getLastName());
+            em.setEmail(employee.getEmail());
+            em.setPhoneNumber(employee.getPhoneNumber());
             em.setJoiningDate(employee.getJoiningDate());
             em.setSalary(employee.getSalary());
-            em.setSsn(employee.getSsn());
+            em.setCommissionPrc(employee.getCommissionPrc());
         }
     }
 
     @Override
-    public void deleteEmployeeBySsn(String ssn) {
-        dao.deleteEmployeeBySsn(ssn);
+    public void deleteEmployeeById(int id) {
+        dao.deleteEmployeeById(id);
     }
 
     @Override
-    public boolean isEmployeeSsnUnique(Integer id, String ssn) {
-        Employee employee=findBySsn(ssn);
+    public boolean isEmployeeEmailUnique(Integer id, String email) {
+        Employee employee=findByEmail(email);
         return (employee == null ||(id!=null&&employee.getId()==id));
     }
+
+    @Override
+    public boolean isEmployeePhoneUnique(Integer id, String phone) {
+        Employee employee=findByPhone(phone);
+        return (employee == null ||(id!=null&&employee.getId()==id));
+    }
+
+
 }

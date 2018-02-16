@@ -22,10 +22,8 @@ public class EmployeeDaoImpl extends AbstractDao<Integer,Employee> implements Em
     }
 
     @Override
-    public void deleteEmployeeBySsn(String ssn) {
-        Query query=getSession().createQuery("delete from Employee where ssn=:ssn");
-        query.setParameter("ssn",ssn);
-        query.executeUpdate();
+    public void deleteEmployeeById(int id) {
+        delete(getByKey(id));
     }
 
     @Override
@@ -36,10 +34,19 @@ public class EmployeeDaoImpl extends AbstractDao<Integer,Employee> implements Em
     }
 
     @Override
-    public Employee findEmployeeBySsn(String ssn) {
+    public Employee findEmployeeByPhone(String phone) {
         CriteriaQuery<Employee> query=createEntityCriteriaQuery();
         Root<Employee> root=query.from(Employee.class);
-        query.select(root).where(createCriteriaBuilder().equal(root.get("ssn"),ssn));
+        query.select(root).where(createCriteriaBuilder().equal(root.get("phoneNumber"),phone));
         return getSession().createQuery(query).uniqueResult();
     }
+
+    @Override
+    public Employee findEmployeeByEmail(String email) {
+        CriteriaQuery<Employee> query=createEntityCriteriaQuery();
+        Root<Employee> root=query.from(Employee.class);
+        query.select(root).where(createCriteriaBuilder().equal(root.get("email"),email));
+        return getSession().createQuery(query).uniqueResult();
+    }
+
 }

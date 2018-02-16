@@ -10,14 +10,18 @@ public interface EmployeeService {
 
     Employee findById(int id);
 
-    Employee findBySsn(String ssn);
+    Employee findByPhone(String phone);
+
+    Employee findByEmail(String email);
 
     void saveEmployee(Employee employee);
 
     void updateEmployee(Employee employee);
 
-    void deleteEmployeeBySsn(String ssn);
+    void deleteEmployeeById(int id);
 
-    boolean isEmployeeSsnUnique(Integer id, String ssn);
+    boolean isEmployeeEmailUnique(Integer id, String email);
+
+    boolean isEmployeePhoneUnique(Integer id, String phone);
 
 }
