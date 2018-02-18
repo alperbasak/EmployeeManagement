@@ -18,8 +18,9 @@
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../static/css/dashboard.css" rel="stylesheet">
-    <link href="../static/css/sticky-footer.css" rel="stylesheet">
+    <link href="../static/css/dashboard.min.css" rel="stylesheet">
+    <link href="../static/css/sticky-footer.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/jquery-ui.min.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -36,7 +37,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse navbar-form">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="<c:url value='/list' />">List of Employees</a></li>
+                <li><a style="display: inline-block" href="<c:url value='/new' />"><img src="../static/images/addnew.png"></a></li>
+                <li><a style="display: inline-block" href="<c:url value='/list' />"><img src="../static/images/whitelist.png" ></a></li>
             <li><form action="<c:url value="/logout"/>" method="post" class="navbar-form">
                 <button type="submit" class="btn btn-default">Logout</button>
                 <input type="hidden" name="${_csrf.parameterName}"
@@ -92,7 +94,7 @@
                     </tr>
 
                     <tr>
-                        <td><label for="commissionPrc" style="width: 15%;text-align: right">Commission Price: </label>
+                        <td><label for="commissionPrc" style="width: 15%;text-align: right">% Commission: </label>
                         <form:input path="commissionPrc" id="ssn"/>
                         <form:errors path="commissionPrc"/></td>
                     </tr>
@@ -120,7 +122,21 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../static/js/jquery.min.js"></script>
+<script src="../static/js/jquery-ui.min.js"></script>
 <script src="../static/js/bootstrap.min.js"></script>
+<script>
+    $( function() {
+        $( "#joiningDate" ).datepicker({
+            showOn: "button",
+            dateFormat: "dd/mm/yy",
+            buttonImage: "../static/images/calendar.gif",
+            buttonImageOnly: true,
+            buttonText: "Select date",
+            changeMonth: true,
+            changeYear: true
+        });
+    } );
+</script>
 </body>
 </html>

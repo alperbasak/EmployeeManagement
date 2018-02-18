@@ -29,7 +29,4 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
     }
 }
 
-//TODO column width ayarlanacak
-//TODO joiningDate formati ayarlanacak
-//TODO decimallar icin , veya . controlu/ ikisini de kabul etmeli
 //TODO registration.jsp de sonuna kadar cizgi olmasin
