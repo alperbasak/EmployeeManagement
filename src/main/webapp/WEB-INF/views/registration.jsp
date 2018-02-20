@@ -51,7 +51,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h2 class="sub-header">Registration Form</h2>
+            <h2 class="sub-header" style="display: inline-block">Registration Form</h2>
             <div class="table-responsive">
                 <form:form method="POST" modelAttribute="employee">
                 <form:input type="hidden" path="id" id="id"/>
@@ -60,43 +60,43 @@
                     <tr>
                         <td><label for="firstName" style="width: 15%;text-align: right">First Name: </label>
                             <form:input path="firstName" id="firstName"/>
-                            <form:errors path="firstName" /></td>
+                            <form:errors path="firstName" cssStyle="color: red"/></td>
                     </tr>
 
                     <tr>
                         <td><label for="lastName" style="width: 15%;text-align: right">Last Name: </label>
                             <form:input path="lastName" id="lastName"/>
-                            <form:errors path="lastName" /></td>
+                         <form:errors path="lastName" cssStyle="color: red"/></td>
                     </tr>
 
                     <tr>
                         <td><label for="email" style="width: 15%;text-align: right">Email: </label>
                             <form:input path="email" id="email"/>
-                            <form:errors path="email" /></td>
+                          <form:errors path="email" cssStyle="color: red"/></td>
                     </tr>
 
                     <tr>
                         <td><label for="phoneNumber" style="width: 15%;text-align: right">Phone Number: </label>
                             <form:input path="phoneNumber" id="phoneNumber"/>
-                            <form:errors path="phoneNumber" /></td>
+                          <form:errors path="phoneNumber" cssStyle="color: red;"/></td>
                     </tr>
 
                     <tr>
                         <td><label for="joiningDate" style="width: 15%;text-align: right">Joining Date: </label>
                         <form:input path="joiningDate" id="joiningDate"/>
-                        <form:errors path="joiningDate" /></td>
+                        <form:errors path="joiningDate" cssStyle="color: red"/></td>
                     </tr>
 
                     <tr>
                         <td><label for="salary" style="width: 15%;text-align: right">Salary: </label>
                         <form:input path="salary" id="salary"/>
-                        <form:errors path="salary" /></td>
+                          <form:errors path="salary" cssStyle="color: red"/></td>
                     </tr>
 
                     <tr>
                         <td><label for="commissionPrc" style="width: 15%;text-align: right">% Commission: </label>
-                        <form:input path="commissionPrc" id="ssn"/>
-                        <form:errors path="commissionPrc"/></td>
+                        <form:input path="commissionPrc" id="commissionPrc"/>
+                        <form:errors path="commissionPrc" cssStyle="color: red"/></td>
                     </tr>
                 </table>
                     <br/>

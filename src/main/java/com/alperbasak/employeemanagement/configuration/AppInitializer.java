@@ -28,5 +28,3 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
             return dispatcherServlet;
     }
 }
-
-//TODO registration.jsp de sonuna kadar cizgi olmasin
